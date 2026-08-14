@@ -245,82 +245,27 @@
 
       
       try {
-        // إرسال مباشر إلى Apps Script عن طريق form POST.
-        // يعمل حتى عند فتح الموقع محليًا عبر file:// بدون مشكلة CORS.
-        const frameName = 'eamarSubmitFrame';
-        let frame = document.getElementById(frameName);
-        if (!frame) {
-          frame = document.createElement('iframe');
-          frame.id = frameName;
-          frame.name = frameName;
-          frame.style.display = 'none';
-          document.body.appendChild(frame);
+        // إرسال عبر fetch مباشرة إلى Apps Script (يمر تحت connect-src، لا form-action،
+        // ويتجنب تعارض بعض المتصفحات مع طريقة إرسال الفورم عبر iframe مخفي).
+        const body = new URLSearchParams(new FormData(form));
+
+        fetch(endpoint, { method: 'POST', mode: 'no-cors', body })
+          .catch(() => {});
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'إرسال طلب الاستشارة';
         }
-
-        const previousAction = form.getAttribute('action');
-        const previousTarget = form.getAttribute('target');
-        const previousMethod = form.getAttribute('method');
-
-        form.setAttribute('action', endpoint);
-        form.setAttribute('method', 'POST');
-        form.setAttribute('target', frameName);
-
-        const restoreFormAttrs = () => {
-          if (previousAction !== null) form.setAttribute('action', previousAction);
-          else form.removeAttribute('action');
-          if (previousTarget !== null) form.setAttribute('target', previousTarget);
-          else form.removeAttribute('target');
-          if (previousMethod !== null) form.setAttribute('method', previousMethod);
-          else form.removeAttribute('method');
-        };
-
-        let completed = false;
-        const onFrameLoad = () => {
-          if (completed) return;
-          completed = true;
-          restoreFormAttrs();
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'إرسال طلب الاستشارة';
-          }
-          if (formMsg) {
-            formMsg.textContent = 'تم إرسال طلبك بنجاح.';
-            formMsg.className = 'form-message success';
-          }
-          form.reset();
-          if (requestTypeField) requestTypeField.value = 'consultation';
-          if (requestedDemoSystem) requestedDemoSystem.value = '';
-          if (requestedDemoDuration) requestedDemoDuration.value = '';
-          if (systemField) systemField.value = '';
-          Object.keys(fields).forEach((key) => setFieldError(key, ''));
-          frame.removeEventListener('load', onFrameLoad);
-        };
-
-        frame.addEventListener('load', onFrameLoad, { once: true });
-        form.submit();
-
-        // احتياطًا: إذا منع المتصفح قراءة استجابة الإطار، نظهر النجاح بعد وقت قصير
-        // لأن الطلب نفسه يكون قد أُرسل إلى Apps Script.
-        setTimeout(() => {
-          if (completed) return;
-          completed = true;
-          restoreFormAttrs();
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'إرسال طلب الاستشارة';
-          }
-          if (formMsg) {
-            formMsg.textContent = 'تم إرسال طلبك.';
-            formMsg.className = 'form-message success';
-          }
-          form.reset();
-          if (requestTypeField) requestTypeField.value = 'consultation';
-          if (requestedDemoSystem) requestedDemoSystem.value = '';
-          if (requestedDemoDuration) requestedDemoDuration.value = '';
-          if (systemField) systemField.value = '';
-          Object.keys(fields).forEach((key) => setFieldError(key, ''));
-          try { frame.removeEventListener('load', onFrameLoad); } catch (_) {}
-        }, 2500);
+        if (formMsg) {
+          formMsg.textContent = 'تم إرسال طلبك بنجاح.';
+          formMsg.className = 'form-message success';
+        }
+        form.reset();
+        if (requestTypeField) requestTypeField.value = 'consultation';
+        if (requestedDemoSystem) requestedDemoSystem.value = '';
+        if (requestedDemoDuration) requestedDemoDuration.value = '';
+        if (systemField) systemField.value = '';
+        Object.keys(fields).forEach((key) => setFieldError(key, ''));
 
       } catch (error) {
         if (submitBtn) {
