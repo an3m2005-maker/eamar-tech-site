@@ -4,9 +4,7 @@
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const year = document.getElementById('year');
-  // ضع رابط الاستقبال الحقيقي هنا مرة واحدة بعد إنشائه.
-  // يدعم Formspree أو Web App في Google Apps Script.
-  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxDVCVBmQiM_3enAt0FojxHmdQ12Auoyw8a897-z334QXWnOH3ysgcRfxnnLPsVKMS1HQ/exec';
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxArWRh72u6wqfm6PaH0T5X0dD4GQx90vS5pixncerapzP_ICIFHB_ulTT2svrFmVgg/exec';
 
   const form = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -34,9 +32,6 @@
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
   }
 
-
-
-  // تنقل بنمط صفحات حقيقية داخل ملف واحد: يظهر محتوى الصفحة المطلوبة فقط.
   const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
   const viewSections = Array.from(document.querySelectorAll('[data-view]'));
   const consultationCtas = Array.from(document.querySelectorAll('a[href="#consultation"]'));
@@ -92,11 +87,9 @@
     if (options.replace) history.replaceState(null, '', `#${nextView}`);
     else history.pushState(null, '', `#${nextView}`);
     renderView(nextView, { behavior: options.behavior || 'auto' });
-    // ضمان بدء كل صفحة من أعلى بدون أي تعديل بصري على التصميم.
     window.requestAnimationFrame(() => window.scrollTo(0, 0));
   };
 
-  // كل رابط داخلي يفتح "صفحة" واحدة فقط، بدل إظهار أجزاء الأقسام التالية تحته.
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       const id = link.getAttribute('href')?.slice(1);
@@ -110,14 +103,12 @@
   window.addEventListener('popstate', () => renderView(getViewFromHash()));
   window.addEventListener('hashchange', () => renderView(getViewFromHash()));
 
-  // أول فتح للملف: اعرض الصفحة المطلوبة فقط.
   const initialView = getViewFromHash();
   if (!window.location.hash || !validViews.has(window.location.hash.slice(1))) {
     history.replaceState(null, '', `#${initialView}`);
   }
   renderView(initialView);
 
-  // اختيار النظام التجريبي من بطاقة النظام ثم نقل المستخدم إلى قسم التجربة.
   const demoSystem = document.getElementById('demoSystem');
   document.querySelectorAll('[data-demo-system]').forEach((link) => {
     link.addEventListener('click', () => {
@@ -126,7 +117,6 @@
     });
   });
 
-  // زر "اطلب الشراء الآن": يهيئ نموذج الاستشارة كطلب شراء بدل استشارة عامة.
   document.querySelectorAll('[data-purchase-cta]').forEach((link) => {
     link.addEventListener('click', () => {
       if (serviceTypeSelect) serviceTypeSelect.value = 'erp';
@@ -243,10 +233,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'جارٍ الإرسال...';
 
-      
       try {
-        // إرسال عبر fetch مباشرة إلى Apps Script (يمر تحت connect-src، لا form-action،
-        // ويتجنب تعارض بعض المتصفحات مع طريقة إرسال الفورم عبر iframe مخفي).
         const body = new URLSearchParams(new FormData(form));
 
         fetch(endpoint, { method: 'POST', mode: 'no-cors', body })
