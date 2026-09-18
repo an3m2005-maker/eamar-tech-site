@@ -40,12 +40,13 @@
   const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
   const viewSections = Array.from(document.querySelectorAll('[data-view]'));
   const consultationCtas = Array.from(document.querySelectorAll('a[href="#consultation"]'));
-  const validViews = new Set(['home', 'services', 'systems', 'demo-access', 'process', 'about', 'faq', 'consultation']);
+  const validViews = new Set(['home', 'services', 'systems', 'service-web', 'service-automation', 'service-branding', 'demo-access', 'process', 'about', 'faq', 'consultation']);
 
   const navForView = (view) => {
     if (view === 'demo-access') return 'systems';
     if (view === 'consultation') return 'consultation';
     if (view === 'faq') return 'about';
+    if (view.startsWith('service-')) return 'services';
     return view;
   };
 
@@ -115,6 +116,15 @@
     history.replaceState(null, '', `#${initialView}`);
   }
   renderView(initialView);
+
+  // تعبئة نوع الخدمة تلقائيًا بنموذج الاستشارة حسب صفحة الخدمة اللي جاء منها الزائر.
+  document.querySelectorAll('[data-service-type]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const type = link.dataset.serviceType || '';
+      const serviceSelect = document.getElementById('serviceType');
+      if (serviceSelect && type) serviceSelect.value = type;
+    });
+  });
 
   // اختيار النظام التجريبي من بطاقة النظام ثم نقل المستخدم إلى قسم التجربة.
   const demoSystem = document.getElementById('demoSystem');
