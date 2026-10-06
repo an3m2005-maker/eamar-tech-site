@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081426">
+  <meta name="description" content="بوت واتساب بالذكاء الاصطناعي لاستقبال طلبات مطعمك على مدار الساعة: يعرض المنيو، يحسب الإجمالي، ويرسل لك الطلب جاهزًا. دفعة واحدة بدون اشتراك شهري.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <title>بوت واتساب للمطاعم | إعمار التقنية</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23081426'/%3E%3Cpath d='M18 44V30l6-4v18h-6Z' fill='%23f5a51c'/%3E%3Cpath d='M28 44V24l6-4v24h-6Z' fill='%23f5a51c'/%3E%3Cpath d='M38 44V28l6-4v20h-6Z' fill='%23f5a51c'/%3E%3Ccircle cx='46' cy='19' r='3.4' fill='%23f5a51c'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="store.css">
+  <meta property="og:title" content="بوت واتساب للمطاعم | إعمار التقنية">
+  <meta property="og:description" content="مطعمك يستقبل الطلبات على واتساب على مدار الساعة. دفعة واحدة بدون اشتراك شهري.">
+  <meta property="og:type" content="website">
+</head>
+<body class="store-page lp-page">
+  <a class="skip-link" href="#main">تجاوز إلى المحتوى</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html#home" aria-label="إعمار التقنية - الصفحة الرئيسية">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <rect width="48" height="48" rx="13" fill="url(#eamarLogoHeader)"/>
+          <path d="M12 32V21.5L16.4 18.6V32H12Z" fill="#081426"/>
+          <path d="M19.8 32V16.2L24.2 13.2V32H19.8Z" fill="#081426"/>
+          <path d="M27.6 32V19.4L32 16.4V32H27.6Z" fill="#081426"/>
+          <circle cx="34.4" cy="13.6" r="2.6" fill="#081426"/>
+          <defs>
+            <linearGradient id="eamarLogoHeader" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f5a51c"/>
+              <stop offset="1" stop-color="#ed8b00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-copy"><strong>إعمار التقنية</strong><small>حلول رقمية للأعمال</small></span>
+      </a>
+      <a class="btn btn-primary lp-head-cta" data-wa="أرغب في بوت واتساب لاستقبال طلبات مطعمي" href="index.html#consultation">اطلب البوت لمطعمك</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero lp-hero" aria-labelledby="lp-title">
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+      <div class="container hero-grid lp-hero-grid">
+        <div class="hero-copy lp-hero-copy">
+          <span class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> بوت واتساب للمطاعم</span>
+          <h1 id="lp-title">مطعمك يستقبل الطلبات على واتساب <span>على مدار الساعة</span></h1>
+          <p>بوت بالذكاء الاصطناعي يعرض المنيو، ويأخذ الطلب كاملًا ويحسب الإجمالي، ثم يرسله لك جاهزًا للتنفيذ. دفعة واحدة بدون اشتراك شهري.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" data-wa="أرغب في بوت واتساب لاستقبال طلبات مطعمي" href="index.html#consultation">اطلب البوت لمطعمك</a>
+            <a class="btn btn-ghost btn-lg" href="#how">شاهد كيف يعمل</a>
+          </div>
+          <div class="trust-row" aria-label="مزايا العرض">
+            <span>دفعة واحدة بدون اشتراك</span>
+            <span>يعمل على رقم مطعمك</span>
+            <span>الإعداد والتدريب مشمولان</span>
+          </div>
+        </div>
+        <figure class="bot-demo lp-demo">
+          <div class="bot-phone"><video src="store-files/bot-demo-web.mp4" poster="store-files/bot-poster.jpg" controls muted playsinline preload="none"></video></div>
+          <figcaption>عرض توضيحي · نموذج تجريبي لمطعم «جمرزان»</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="pain-title">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">المشكلة</span>
+          <h2 id="pain-title">وقت الزحمة، واتساب المطعم يتحول لضغط</h2>
+        </div>
+        <div class="lp-pains">
+          <article class="service-card"><div class="service-icon" aria-hidden="true"><span>01</span></div><h3>رسائل تتأخر أو تضيع</h3><p>الزبون يسأل عن المنيو والأسعار، وما أحد فاضي يرد، فيطلب من مكان ثاني.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true"><span>02</span></div><h3>أخطاء في الطلب والحساب</h3><p>كتابة الطلب يدويًا من المحادثة تسبب نسيان أصناف وأخطاء في الإجمالي.</p></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true"><span>03</span></div><h3>موظف مشغول بالجوال</h3><p>بدل ما يجهّز الطلبات، يقضي وقته يرد على نفس الأسئلة كل يوم.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">كيف يعمل</span>
+          <h2 id="how-title">من رسالة الزبون إلى طلب جاهز في دقائق</h2>
+        </div>
+        <ol class="process-grid lp-steps">
+          <li><span>01</span><h3>الزبون يراسل المطعم</h3><p>على رقم واتساب مطعمك، أو بمسح رمز QR على الطاولة.</p></li>
+          <li><span>02</span><h3>يختار من القائمة</h3><p>الأقسام والأصناف والكميات بأزرار واضحة، أو يكتب ويرسل صوتيًا.</p></li>
+          <li><span>03</span><h3>البوت يحسب ويؤكد</h3><p>الإجمالي ورسوم التوصيل، وطريقة الاستلام أو موقع التوصيل.</p></li>
+          <li><span>04</span><h3>الطلب يصلك جاهزًا</h3><p>إشعار فوري بأزرار قبول وجاهز وإلغاء، والزبون يُبلَّغ بالحالة.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="feat-title">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">المميزات</span>
+          <h2 id="feat-title">كل ما يحتاجه مطعمك في محادثة واحدة</h2>
+        </div>
+        <ul class="bot-features lp-features">
+          <li><b>قوائم مرتبة</b><span>الأقسام والأصناف والكميات بأزرار واضحة</span></li>
+          <li><b>حساب تلقائي</b><span>الإجمالي ورسوم التوصيل والحد الأدنى للطلب</span></li>
+          <li><b>توصيل أو استلام</b><span>استلام موقع الزبون مباشرة على الخريطة</span></li>
+          <li><b>يفهم الرسائل الصوتية</b><span>ويجيب عن الأسئلة من معلومات مطعمك</span></li>
+          <li><b>إشعار فوري بالطلب</b><span>بأزرار قبول وجاهز وإلغاء</span></li>
+          <li><b>سجل الطلبات</b><span>كل طلب يُحفظ تلقائيًا في جدول</span></li>
+          <li><b>أوقات الدوام</b><span>يعرف أوقات العمل ويعتذر عن الأصناف المنتهية</span></li>
+          <li><b>تحويل لموظف</b><span>عند الشكاوى أو الطلبات الخاصة</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="offer" aria-labelledby="offer-title">
+      <div class="container lp-offer">
+        <div class="section-heading">
+          <span class="section-kicker">السعر</span>
+          <h2 id="offer-title">دفعة واحدة، والبوت لك</h2>
+        </div>
+        <div class="lp-price-card">
+          <div class="lp-price-top">
+            <div><span class="lp-plan">بوت الطلبات للمطاعم</span><p>يرد ويأخذ الطلب كاملًا ويرسله لك</p></div>
+            <strong>1,999 <small>ر.س</small><em>≈ 533 دولار · دفعة واحدة</em></strong>
+          </div>
+          <ul class="pk-list">
+            <li>إعداد البوت وربطه برقم واتساب الأعمال لمطعمك</li>
+            <li>إدخال المنيو والأسعار وأوقات الدوام وطرق الاستلام</li>
+            <li>جدول تلقائي لتسجيل الطلبات</li>
+            <li>تدريب على الاستخدام ودعم مجاني 60 يومًا</li>
+          </ul>
+          <a class="btn btn-primary btn-lg lp-price-cta" data-wa="أرغب في بوت واتساب لاستقبال طلبات مطعمي" href="index.html#consultation">اطلب البوت لمطعمك</a>
+          <p class="lp-price-note">رسوم Meta لواتساب ورسوم مزود الذكاء الاصطناعي تُسجَّل باسمك وتُدفع مباشرة لهما. تحتاج بوت ردود فقط بدون طلبات؟ <a href="store.html#whatsapp-bot">بوت الردود 999 ر.س</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" aria-labelledby="lp-faq-title">
+      <div class="container faq-layout">
+        <div class="faq-intro">
+          <span class="section-kicker">أسئلة شائعة</span>
+          <h2 id="lp-faq-title">قبل أن تطلب</h2>
+          <p>عندك سؤال ثاني؟ <a class="lp-inline-wa" data-wa="عندي سؤال عن بوت واتساب للمطاعم" href="index.html#consultation">راسلنا على واتساب</a></p>
+        </div>
+        <div class="accordion">
+          <details open><summary>هل يوجد اشتراك شهري؟</summary><p>لا. تدفع مرة واحدة. التكاليف التشغيلية (رسوم Meta ومزود الذكاء الاصطناعي) تكون باسمك وتدفعها لهم مباشرة.</p></details>
+          <details><summary>كم يستغرق التركيب؟</summary><p>التسليم من أسبوع بعد استلام المنيو ومعلومات المطعم، والتسليم المستعجل متاح.</p></details>
+          <details><summary>كيف أوقف صنفًا انتهى؟</summary><p>برسالة واتساب واحدة من جوال المطعم، والبوت يعتذر للزبائن عنه حتى ترجعه.</p></details>
+          <details><summary>هل يفهم الرسائل الصوتية واللهجة؟</summary><p>نعم، يحوّل الرسالة الصوتية لنص ويفهم طلب الزبون، ويرد بالعربي.</p></details>
+          <details><summary>ماذا لو عند الزبون شكوى؟</summary><p>البوت يتوقف ويحوّل المحادثة لموظف المطعم مباشرة.</p></details>
+          <details><summary>نشاطي ليس مطعمًا</summary><p>نوفر بوت حجوزات للصالونات والعيادات وغيرها بنفس السعر. <a data-wa="أرغب في بوت حجوزات لنشاطي" href="index.html#consultation">اطلب عرضًا</a></p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section lp-final" aria-labelledby="final-title">
+      <div class="container lp-final-inner">
+        <h2 id="final-title">خلّ واتساب يستقبل الطلبات عنك</h2>
+        <p>بوت يعمل على رقم مطعمك، بدفعة واحدة وبدون اشتراك شهري.</p>
+        <a class="btn btn-primary btn-lg" data-wa="أرغب في بوت واتساب لاستقبال طلبات مطعمي" href="index.html#consultation">اطلب البوت لمطعمك</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="lp-sticky" aria-hidden="false">
+    <a class="btn btn-primary" data-wa="أرغب في بوت واتساب لاستقبال طلبات مطعمي" href="index.html#consultation">اطلب البوت · 1,999 ر.س</a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="brand footer-brand" href="index.html#home" aria-label="إعمار التقنية - الصفحة الرئيسية">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <rect width="48" height="48" rx="13" fill="url(#eamarLogoFooter)"/>
+          <path d="M12 32V21.5L16.4 18.6V32H12Z" fill="#081426"/>
+          <path d="M19.8 32V16.2L24.2 13.2V32H19.8Z" fill="#081426"/>
+          <path d="M27.6 32V19.4L32 16.4V32H27.6Z" fill="#081426"/>
+          <circle cx="34.4" cy="13.6" r="2.6" fill="#081426"/>
+          <defs>
+            <linearGradient id="eamarLogoFooter" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f5a51c"/>
+              <stop offset="1" stop-color="#ed8b00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-copy"><strong>إعمار التقنية</strong><small>حلول رقمية للأعمال</small></span>
+      </a>
+      <p>أنظمة أعمال ومواقع وأتمتة وهوية رقمية ضمن حلول عملية قابلة للتطوير.</p>
+      <nav aria-label="روابط التذييل">
+        <a href="index.html#services">الخدمات</a>
+        <a href="index.html#systems">الأنظمة</a>
+        <a href="store.html">الأسعار</a>
+        <a href="store-terms.html">الشروط والأحكام</a>
+        <a href="store-refund.html">سياسة الاسترجاع</a>
+        <a href="index.html#consultation">طلب استشارة</a>
+      </nav>
+      <div class="footer-contact" aria-label="التواصل المباشر">
+        <strong>تواصل معنا</strong>
+        <a href="mailto:eamar.tech2@gmail.com">eamar.tech2@gmail.com</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 إعمار التقنية. جميع الحقوق محفوظة.</span>
+      <a href="#main">العودة للأعلى ↑</a>
+    </div>
+  </footer>
+  <script src="store.js" defer></script>
+</body>
+</html>
