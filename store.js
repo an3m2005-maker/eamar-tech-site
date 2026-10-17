@@ -5,7 +5,7 @@
   const WHATSAPP = '966550811194';
 
   // أزرار الشراء: لين يتفعّل متجر Lemon Squeezy (الرابط فيه YOUR-STORE) يتحول الزر لطلب عبر واتساب
-  const names = { RESTAURANT: 'نظام المطاعم والتكاليف', CONTRACTING: 'نظام المقاولات والمشاريع', HESBAN: 'نظام حسبان للمناديب والتوزيع' };
+  const names = { RESTAURANT: 'نظام المطاعم والمطابخ', RESTAURANT_CAFE: 'نظام المطاعم والمقاهي', CONTRACTING: 'نظام المقاولات والمشاريع', HESBAN: 'نظام حسبان للمناديب والتوزيع' };
   document.querySelectorAll('a[href*="YOUR-STORE"]').forEach((a) => {
     const code = a.getAttribute('href').split('/').pop();
     a.dataset.wa = 'أرغب في شراء النسخة الأساسية من ' + (names[code] || 'النظام');

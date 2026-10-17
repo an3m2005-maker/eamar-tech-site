@@ -149,7 +149,11 @@
   if (demoRequestForm) {
     demoRequestForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const system = demoSystem?.value || '';
+      const rawSystem = demoSystem?.value || '';
+      // نظام المطاعم بنسختين: النظام نفسه restaurant، والنسخة تنكتب في تفاصيل الطلب ويقرأها البرنامج
+      const isCafe = rawSystem === 'restaurant-cafe';
+      const system = isCafe ? 'restaurant' : rawSystem;
+      const editionTag = system === 'restaurant' ? ` [النسخة: ${isCafe ? 'مطاعم ومقاهي' : 'مطاعم ومطابخ'}]` : '';
       const duration = demoDuration?.value || '';
       if (!system) {
         if (demoFormMsg) {
@@ -167,7 +171,7 @@
       if (requestedDemoSystem) requestedDemoSystem.value = system;
       if (systemField) systemField.value = system;
       if (requestedDemoDuration) requestedDemoDuration.value = duration;
-      if (detailsField) detailsField.value = `طلب رابط تجريبي: ${systemLabel} — المدة: ${durationLabel}.`;
+      if (detailsField) detailsField.value = `طلب رابط تجريبي: ${systemLabel} — المدة: ${durationLabel}.${editionTag}`;
       if (demoFormMsg) demoFormMsg.textContent = '';
       window.location.hash = '#consultation';
     });
