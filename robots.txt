@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://an3m2005-maker.github.io/eamar-tech-site/sitemap.xml
+Sitemap: https://sanjaktech.com/sitemap.xml
