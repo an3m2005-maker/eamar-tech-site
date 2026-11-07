@@ -627,3 +627,6 @@ body[data-current-view="faq"] main{min-height:0!important}
 .quote-callout h3{margin:6px 0 8px;font-size:22px}.quote-callout p{margin:0;color:#64748b;line-height:1.8;max-width:760px}
 @media(max-width:950px){.work-grid{grid-template-columns:1fr 1fr}.work-card-method{grid-column:1/-1}.quote-callout{align-items:flex-start;flex-direction:column}}
 @media(max-width:650px){.work-grid{grid-template-columns:1fr}.work-card-method{grid-column:auto}.work-card{padding:20px}.work-actions{display:grid}.work-actions .btn{width:100%}.quote-callout{padding:20px}}
+
+/* أهداف لمس مريحة على الجوال */
+.footer-main nav a,.footer-contact a,.footer-bottom a{display:inline-flex;align-items:center;min-height:40px}
