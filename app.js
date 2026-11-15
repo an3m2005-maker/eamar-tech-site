@@ -245,6 +245,57 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'جارٍ الإرسال...';
 
+      // طلب تجربة: نرسله مباشرة ونعرض رابط التجربة للعميل فورًا
+      if (requestTypeField && requestTypeField.value === 'demo') {
+        submitBtn.textContent = 'جارٍ تجهيز نسختك التجريبية...';
+        showFormMessage('نجهّز لك نسخة تجريبية خاصة، ثواني وتكون جاهزة...', '');
+        const resetDemoForm = () => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'إرسال طلب الاستشارة';
+          form.reset();
+          if (requestTypeField) requestTypeField.value = 'consultation';
+          if (requestedDemoSystem) requestedDemoSystem.value = '';
+          if (requestedDemoDuration) requestedDemoDuration.value = '';
+          if (systemField) systemField.value = '';
+          Object.keys(fields).forEach((key) => setFieldError(key, ''));
+        };
+        try {
+          const res = await fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)) });
+          const data = await res.json();
+          resetDemoForm();
+          if (data && data.ok && data.url) {
+            if (formMsg) {
+              formMsg.className = 'form-message success';
+              formMsg.textContent = '';
+              const title = document.createElement('strong');
+              title.textContent = data.repeated ? 'عندك تجربة سارية — هذا رابطها:' : 'نسختك التجريبية جاهزة.';
+              const link = document.createElement('a');
+              link.href = data.url;
+              link.target = '_blank';
+              link.rel = 'noopener';
+              link.className = 'btn btn-primary';
+              link.style.cssText = 'display:inline-flex;margin:10px 0 6px';
+              link.textContent = 'افتح النظام الآن';
+              const hint = document.createElement('div');
+              hint.textContent = data.login === 'page'
+                ? 'بيانات الدخول موجودة في صفحة التجربة.'
+                : data.login
+                  ? 'بيانات الدخول: اسم المستخدم admin — كلمة المرور 1234. احفظ الرابط، يبقى شغال لين تنتهي مدة التجربة.'
+                  : 'أول ما تفتح الرابط أنشئ حساب المدير باسم وكلمة مرور من اختيارك. احفظ الرابط، يبقى شغال لين تنتهي مدة التجربة.';
+              formMsg.append(title, document.createElement('br'), link, hint);
+            }
+          } else if (data && data.ok) {
+            showFormMessage('تم استلام طلبك، وبنرسل لك رابط التجربة على واتساب قريبًا.', 'success');
+          } else {
+            showFormMessage((data && data.message) || 'تعذر إرسال الطلب، حاول مرة ثانية.', 'error');
+          }
+        } catch (_) {
+          resetDemoForm();
+          showFormMessage('تم إرسال طلبك، وبنرسل لك رابط التجربة على واتساب قريبًا.', 'success');
+        }
+        return;
+      }
+
       
       try {
         // إرسال مباشر إلى Apps Script عن طريق form POST.
