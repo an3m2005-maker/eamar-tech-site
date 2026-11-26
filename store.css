@@ -211,3 +211,16 @@ picture{display:contents}
 /* أهداف لمس مريحة */
 .bot-try{display:inline-flex;align-items:center;justify-content:center;min-height:44px}
 .sp-diff{display:inline-block;padding:10px 4px}
+
+/* بطاقة التقرير التوضيحية في صفحات هبوط حُسبان */
+.lp-ledger{margin:0;position:static}
+.lp-ledger-card{background:#fff;color:var(--ink);border-radius:var(--radius);padding:24px 26px;box-shadow:0 30px 70px rgba(0,0,0,.28);border:1px solid rgba(245,165,28,.35)}
+.lp-ledger-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.lp-ledger-head b{font-size:19px}
+.lp-ledger-head small{color:var(--muted);font-size:12px;font-weight:700}
+.lp-ledger-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+.lp-ledger-row b{white-space:nowrap}
+.lp-ledger-total{border-bottom:0;padding-top:16px;font-weight:800}
+.lp-ledger-total b{background:var(--gold-2);color:#081426;padding:4px 14px;border-radius:10px}
+.lp-ledger figcaption{color:#9fb0c5;font-size:13px;text-align:center;margin-top:12px}
+.lp-offer .lp-price-card+.lp-price-card{margin-top:18px}
