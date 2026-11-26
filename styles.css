@@ -630,3 +630,10 @@ body[data-current-view="faq"] main{min-height:0!important}
 
 /* أهداف لمس مريحة على الجوال */
 .footer-main nav a,.footer-contact a,.footer-bottom a{display:inline-flex;align-items:center;min-height:40px}
+
+/* ملاحظة بيانات دخول العرض المفتوح تحت كل نظام */
+.open-demo-note {
+  margin: 10px 0 0;
+  font-size: .88rem;
+  opacity: .85;
+}
