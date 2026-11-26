@@ -36,86 +36,56 @@
 
 
 
-  // تنقل بنمط صفحات حقيقية داخل ملف واحد: يظهر محتوى الصفحة المطلوبة فقط.
+  // صفحة واحدة تنزل فيها كل الأقسام: روابط القائمة تنزل للقسم بسلاسة،
+  // والرابط النشط في القائمة يتغيّر حسب القسم الظاهر للزائر.
   const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
-  const viewSections = Array.from(document.querySelectorAll('[data-view]'));
-  const consultationCtas = Array.from(document.querySelectorAll('a[href="#consultation"]'));
-  const validViews = new Set(['home', 'services', 'systems', 'service-web', 'service-automation', 'service-branding', 'demo-access', 'process', 'about', 'faq', 'consultation']);
+  const sections = Array.from(document.querySelectorAll('main > section[id]'));
+  const consultationCtas = Array.from(document.querySelectorAll('a.desktop-cta[href="#consultation"]'));
+  const sectionIds = new Set(sections.map((s) => s.id));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const navForView = (view) => {
-    if (view === 'demo-access') return 'systems';
-    if (view === 'consultation') return 'consultation';
-    if (view === 'faq') return 'about';
-    if (view.startsWith('service-')) return 'services';
-    return view;
+  const navForSection = (id) => {
+    if (id === 'demo-access') return 'systems';
+    if (id === 'faq') return 'about';
+    return id;
   };
 
-  const setActiveNav = (view) => {
-    const activeNav = navForView(view);
+  const setActiveNav = (id) => {
+    const activeNav = navForSection(id);
     navLinks.forEach((link) => {
       const active = link.dataset.nav === activeNav;
       link.classList.toggle('active', active);
-      if (active) link.setAttribute('aria-current', 'page');
+      if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-
-    consultationCtas.forEach((link) => {
-      if (!link.classList.contains('desktop-cta')) return;
-      const active = view === 'consultation';
-      link.classList.toggle('cta-active', active);
-      if (active) link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
-    });
+    consultationCtas.forEach((link) => link.classList.toggle('cta-active', id === 'consultation'));
   };
 
-  const getViewFromHash = () => {
-    const id = (window.location.hash || '#home').slice(1);
-    return validViews.has(id) ? id : 'home';
-  };
-
-  const renderView = (view, options = {}) => {
-    const nextView = validViews.has(view) ? view : 'home';
-    viewSections.forEach((section) => {
-      section.hidden = section.dataset.view !== nextView;
-    });
-    setActiveNav(nextView);
-    document.body.dataset.currentView = nextView;
-
-    const behavior = options.behavior || 'auto';
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior });
-    });
-  };
-
-  const navigateTo = (view, options = {}) => {
-    const nextView = validViews.has(view) ? view : 'home';
-    if (options.replace) history.replaceState(null, '', `#${nextView}`);
-    else history.pushState(null, '', `#${nextView}`);
-    renderView(nextView, { behavior: options.behavior || 'auto' });
-    // ضمان بدء كل صفحة من أعلى بدون أي تعديل بصري على التصميم.
-    window.requestAnimationFrame(() => window.scrollTo(0, 0));
-  };
-
-  // كل رابط داخلي يفتح "صفحة" واحدة فقط، بدل إظهار أجزاء الأقسام التالية تحته.
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
-      const id = link.getAttribute('href')?.slice(1);
-      if (!id || !validViews.has(id)) return;
+      const id = link.getAttribute('href').slice(1);
+      if (!sectionIds.has(id)) return;
       event.preventDefault();
-      navigateTo(id);
       if (link.closest('#mobileMenu')) closeMenu();
+      const target = document.getElementById(id);
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', id === 'home' ? location.pathname : `#${id}`);
     });
   });
 
-  window.addEventListener('popstate', () => renderView(getViewFromHash()));
-  window.addEventListener('hashchange', () => renderView(getViewFromHash()));
-
-  // أول فتح للملف: اعرض الصفحة المطلوبة فقط.
-  const initialView = getViewFromHash();
-  if (!window.location.hash || !validViews.has(window.location.hash.slice(1))) {
-    history.replaceState(null, '', `#${initialView}`);
+  // تتبع القسم الظاهر: القسم اللي يغطي منتصف الشاشة هو النشط
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) setActiveNav(entry.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((s) => observer.observe(s));
   }
-  renderView(initialView);
+  setActiveNav((location.hash || '#home').slice(1));
+  // رابط مباشر لقسم (مثل ‎#consultation‎): ننزل له بعد اكتمال تحميل الصور والخطوط
+  const initialId = location.hash.slice(1);
+  if (sectionIds.has(initialId)) {
+    window.addEventListener('load', () => document.getElementById(initialId).scrollIntoView({ block: 'start' }));
+  }
 
   // تعبئة نوع الخدمة تلقائيًا بنموذج الاستشارة حسب صفحة الخدمة اللي جاء منها الزائر.
   document.querySelectorAll('[data-service-type]').forEach((link) => {

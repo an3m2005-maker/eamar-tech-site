@@ -583,18 +583,8 @@ body{line-height:1.7}
 }
 
 
-/* ===== V14 — real single-view navigation: never show the next page under the current one ===== */
-[data-view][hidden]{display:none!important}
-main{min-height:calc(100vh - var(--header-h))}
-body[data-current-view="home"] .site-footer{margin-top:0}
 
 
-/* ===== V17 — page isolation fix only; preserve V14 visual design ===== */
-main{min-height:0!important}
-[data-view][hidden]{display:none!important}
-body[data-current-view="process"] main,
-body[data-current-view="about"] main,
-body[data-current-view="faq"] main{min-height:0!important}
 
 
 /* ===== V18 — footer spacing only. No other visual changes. ===== */
