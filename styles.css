@@ -627,3 +627,9 @@ body{line-height:1.7}
   font-size: .88rem;
   opacity: .85;
 }
+
+/* بيانات دخول التجربة: سطر واحد تحت عنوان قسم الأنظمة بدل تكرارها تحت كل نظام */
+.demo-credentials{margin:14px auto 0;max-width:680px;text-align:center;font-size:.92rem;color:#e2e8f0}
+.demo-credentials b{color:#fbbf24}
+/* أيقونات الخدمات بدل الأرقام */
+.service-icon svg{width:20px;height:20px}
