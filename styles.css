@@ -633,3 +633,8 @@ body{line-height:1.7}
 .demo-credentials b{color:#fbbf24}
 /* أيقونات الخدمات بدل الأرقام */
 .service-icon svg{width:20px;height:20px}
+/* رابط «اطلب نسخة تجربة خاصة بك»: يبان كرابط واضح بلون الهوية */
+.open-demo-note{margin-top:14px;opacity:1}
+.open-demo-note a{color:#fbbf24;font-weight:700;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.open-demo-note a::after{content:" ←";text-decoration:none;display:inline-block;margin-inline-start:4px}
+.open-demo-note a:hover{color:#fcd34d}
